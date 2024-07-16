@@ -19,7 +19,7 @@
     </div>
 	<audio id="linkmp3" src="assets/audio/confess.mp3" autoplay></audio>
     <div id='Content'>
-        <div id="suratin" onClick="memulai(); audio.play();">
+        <div id="suratin" onClick="memulai();">
             <img src="assets/image/amplop.png"/>
         </div>
         <p id="ket">Mở thư này</p>   
@@ -144,7 +144,6 @@ const swalst = Swal.mixin({
 	timerProgressBar: true,
 	imageHeight: 100,
 });
-audio = new Audio('' + linkmp3.innerHTML);
 const swals = Swal.mixin({
 	allowOutsideClick: false,
 	cancelButtonColor: '#FF0040',
