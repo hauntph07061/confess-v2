@@ -1,48 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link type="image/png" sizes="96x96" rel="icon" href="assets/image/favicon.png">
-	<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<script src="script.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
 	<script src="https://kit.fontawesome.com/4f3ce16e3e.js" crossorigin="anonymous"></script>
-	<title>I Love You</title>
+	<title>Gửi người tôi yêu ❤️</title>
 </head>
 
 <body>
-	<!-- <audio id="linkmp3">assets/audio/backsound.mp3</audio> -->
 	<div id="bodyblur">
-		<img src="assets/image/background.jpg" id="wallpaper" />
+		<img src="assets/image/background.jpg" id="wallpaper" alt="Background" />
 	</div>
-	<audio id="linkmp3" src="assets/audio/confess.mp3" autoplay></audio>
+	<audio id="linkmp3" src="assets/audio/confess.mp3" loop preload="auto"></audio>
+
+	<!-- Floating Music Toggle Button -->
+	<div class="music-btn" id="musicBtn" onclick="toggleMusic()">
+		<i class="fas fa-play"></i>
+		<span>Bật nhạc</span>
+	</div>
+
 	<div id='Content'>
 		<div id="suratin" onClick="memulai();">
-			<img src="assets/image/amplop.png" />
+			<img src="assets/image/amplop.png" alt="Envelope" />
 		</div>
 		<p id="ket">Mở thư này</p>
 
 		<div>
 			<blockquote id='bq'>
 				<div>
-					<img src="assets/gif/gif_1.gif" id="fotoakhir" />
-					<img src="assets/gif/gif_2.gif" id="fotoakhir2" />
-					<img src="assets/gif/gif_3.gif" id="fotoakhir3" />
-					<img src="assets/gif/gif_4.gif" id="fotoakhir4" />
+					<img src="assets/gif/gif_1.gif" id="fotoakhir" alt="GIF 1" />
+					<img src="assets/gif/gif_2.gif" id="fotoakhir2" alt="GIF 2" />
+					<img src="assets/gif/gif_3.gif" id="fotoakhir3" alt="GIF 3" />
+					<img src="assets/gif/gif_4.gif" id="fotoakhir4" alt="GIF 4" />
 				</div>
 				<p id="kalimat">Bạn có yêu tôi hônggg? 🤭❤️</p>
 				<p id="kalimatb"></p>
 				<p id="kalimatc"></p>
 				<p id="kalimat2">I Love You too 🤭</p>
-				<p id="kalimatb2">Chúng ta sẽ yêu nhau mãi mãi ❤️</p>
-				<p id="kalimatc2">Yess...🏃 Chúng ta sẽ cùng nhau lưu giữ khoảnh khắc này : <b id="ctimer"
-						style="font-size:24px">3</b></p>
+				<p id="kalimatb2">Hy vọng hành trình phía trước luôn có chúng ta. ❤️</p>
+				<p id="kalimatc2">Yess...🏃 Chúng ta sẽ cùng nhau lưu giữ khoảnh khắc này : <b id="ctimer">3</b></p>
 				<p id="kalimat3">😜</p>
-				<p id="kalimatb3">Yêu nhau, gặp nhau là do trời định nhưng để có thể đi cùng nhau lại là sự cố gắng.❤️
+				<p id="kalimatb3">Thật vui vì chúng ta đã gặp nhau và có cơ hội trở thành một phần trong cuộc sống của nhau. Hy vọng chúng ta sẽ có thật nhiều ngày tháng đẹp đẽ bên nhau. ❤️
 				</p>
 				<p id="kalimatc3">📅 Ngày 16 tháng 11 năm 2026 </p>
 			</blockquote>
@@ -65,28 +72,64 @@
 		fungsi = 0;
 		Bn2.innerHTML = Bn.innerHTML;
 
+		var audio = document.getElementById("linkmp3");
+		var musicBtn = document.getElementById("musicBtn");
+
+		function updateMusicBtn(playing) {
+			if (!musicBtn) return;
+			var icon = musicBtn.querySelector("i");
+			var text = musicBtn.querySelector("span");
+			if (playing) {
+				musicBtn.classList.add("playing");
+				if (icon) icon.className = "fas fa-compact-disc";
+				if (text) text.textContent = "Tắt nhạc";
+			} else {
+				musicBtn.classList.remove("playing");
+				if (icon) icon.className = "fas fa-volume-mute";
+				if (text) text.textContent = "Bật nhạc";
+			}
+		}
+
+		function toggleMusic() {
+			if (!audio) return;
+			if (audio.paused) {
+				audio.play().then(function () {
+					updateMusicBtn(true);
+				}).catch(function () { });
+			} else {
+				audio.pause();
+				updateMusicBtn(false);
+			}
+		}
+
 		function showDiv() {
-			nomorWhatsapp = "62876543210"
-			pesanwhatsapp = "Kamu diterima jadi pacar aku 🤭❤️";
 			Bn2.style.display = "none";
-			Content.style = "opacity:1;margin-top:15vh;";
-			ket.style = "margin-top:30px";
+			Content.style.opacity = "1";
+			Content.style.marginTop = "15vh";
+			ket.style.marginTop = "30px";
 		}
 
 		function memulai() {
+			if (audio) {
+				audio.play().then(function () {
+					updateMusicBtn(true);
+				}).catch(function () { });
+			}
 			suratin.style = "transition:all 1s ease;transform:scale(.1);opacity:0";
 			ket.style = "transition:all 1s ease;transform:scale(.1);opacity:0";
-			setTimeout(mulaikonten, 300)
+			setTimeout(mulaikonten, 300);
 		}
 
 		function mulaikonten() {
 			otomatis();
-			suratin.style = "display:none";
-			ket.style = "display:none";
-			Content.style = "opacity:1;margin-top:4vh";
-			bodyblur.style = "opacity:.6;animation:none";
-			wallpaper.style = "transform: scale(2);opacity:1;";
-			fotoakhir.style = "display:inline-flex;";
+			suratin.style.display = "none";
+			ket.style.display = "none";
+			Content.style.opacity = "1";
+			Content.style.marginTop = "4vh";
+			bodyblur.style.opacity = ".6";
+			wallpaper.style.transform = "scale(1.2)";
+			wallpaper.style.opacity = "1";
+			fotoakhir.style.display = "inline-flex";
 			setTimeout(ftmuncul, 200);
 			bq.style = "position:relative;opacity:1;visibility:visible;transform: scale(1);border-radius:var(--bingkai);margin-top:0";
 			fungsi = 1;
@@ -95,7 +138,9 @@
 
 		function ftmuncul() {
 			if (ftganti == 0) {
-				fotoakhir.style = "display:inline-flex;opacity:1;transform:scale(1)";
+				fotoakhir.style.display = "inline-flex";
+				fotoakhir.style.opacity = "1";
+				fotoakhir.style.transform = "scale(1)";
 			}
 			if (ftganti == 1) {
 				fotoakhir.src = fotoakhir2.src;
@@ -112,16 +157,16 @@
 		}
 
 		function fthilang() {
-			fotoakhir.style = "display:inline-flex;opacity:1;transition:all .7s ease;transform:scale(.1)";
-		}
-
-		function jjfoto() {
-			fotoakhir.style.animation = "rto .8s infinite alternate";
+			fotoakhir.style.display = "inline-flex";
+			fotoakhir.style.opacity = "1";
+			fotoakhir.style.transition = "all .7s ease";
+			fotoakhir.style.transform = "scale(.1)";
 		}
 
 		function tombol() {
-			Tombol.style = "opacity:1;transform: scale(1);";
-			Bn.style = "margin:12px 0 12px 12px";
+			Tombol.style.opacity = "1";
+			Tombol.style.transform = "scale(1)";
+			Bn.style = "margin:12px 8px";
 			ftom = 1;
 		}
 
@@ -135,53 +180,13 @@
 		}
 
 		async function menuju() {
-			window.location = "https://hauntph07061.github.io/confess-v2/ssuccess.html";
-			Tombol.style = "margin-top:15px;opacity:1;transform: scale(1);";
+			window.location = "ssuccess.html";
 		}
 
 		setTimeout(showDiv, 100);
 
-		const swalst = Swal.mixin({
-			timer: 2777,
-			allowOutsideClick: false,
-			showConfirmButton: false,
-			timerProgressBar: true,
-			imageHeight: 100,
-		});
-		const swals = Swal.mixin({
-			allowOutsideClick: false,
-			cancelButtonColor: '#FF0040',
-			imageWidth: 100,
-			imageHeight: 100,
-		});
-		const style = document.createElement('style');
-		var today = new Date();
-		var dd = String(today.getDate()).padStart(2, '0');
-		var mm = String(today.getMonth() + 1).padStart(2, '0');
-		var yyyy = today.getFullYear();
-		const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-		today = dd + ' ' + monthNames[today.getMonth()] + ' ' + yyyy;
-		const body = document.querySelector("body");
-
-		function createHeart() {
-			const heart = document.createElement("div");
-			heart.className = "fas fa-heart";
-			heart.style.left = (Math.random() * 90) + "vw";
-			heart.style.animationDuration = (Math.random() * 3) + 2 + "s";
-			body.appendChild(heart);
-		}
-		setInterval(function name(params) {
-			var heartArr = document.querySelectorAll(".fa-heart");
-			if (heartArr.length > 100) {
-				heartArr[0].remove()
-			}
-		}, 100);
-
+		function createHeart() { }
 	</script>
-
-
-
-
 </body>
 
 </html>

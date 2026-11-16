@@ -1,39 +1,313 @@
-<!DOCTYPE html>
-<html>
+﻿<!DOCTYPE html>
+<html lang="vi">
 
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="image/png" sizes="96x96" rel="icon" href="assets/image/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Great+Vibes&family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="css/main.css" rel="stylesheet">
+  <title>I Love You ❤️</title>
 </head>
 
 <body>
-  <audio id="linkmp3" src="assets/audio/confess.mp3" autoplay></audio>
-  <div>
-    <!-- <audio id="linkmp3">assets/audio/backsound.mp3</audio> -->
-    <div class="container2">
-      <div class="content">
-        <canvas id="universe"></canvas>
-      </div>
+  <!-- Romantic Soft Wallpaper Overlay -->
+  <div id="bodyblur">
+    <img src="assets/image/background.jpg" id="wallpaper" alt="Wallpaper" />
+  </div>
+
+  <!-- Audio Player -->
+  <audio id="linkmp3" src="assets/audio/confess.mp3" autoplay loop></audio>
+
+  <!-- Floating Music Toggle Button -->
+  <div class="music-btn playing" id="musicBtn" onclick="toggleMusic()">
+    <i class="fas fa-compact-disc"></i>
+    <span>Tắt nhạc</span>
+  </div>
+
+  <!-- Starfield Canvas Container -->
+  <div class="container2">
+    <div class="content">
+      <canvas id="universe"></canvas>
     </div>
   </div>
+
+  <!-- Central Romantic Showcase -->
   <div class="title">
-    <!-- EDIT HERE -->
-    <h3 class="STARDUST1">16-11-2026</h3>
-    <h1 class="STARDUST2">Hậu &amp; Ly</h1>
-    <h3 class="STARDUST3">L O V E <strong>❤</strong> Y O U</h3>
-    <img class="img"
-      src="https://allimages.sgp1.digitaloceanspaces.com/tipeduvn/2022/07/Bo-Hinh-Nen-Tinh-Yeu-Dep-Nhat-Va-Tham-Thiet.jpg"
-      alt="JUNO_OKYO" />
-    <canvas id="pinkboard"></canvas>
+
+    <!-- Glass card nổi bật -->
+    <div class="title-text">
+      <h3 class="STARDUST1">✦ 16 · 11 · 2026 ✦</h3>
+      <h1 class="STARDUST2"><span>Hậu</span><span class="couple-heart" aria-label="trái tim">♥</span><span>Ly</span></h1>
+      <h3 class="STARDUST3">L O V E &nbsp;<strong>♥</strong>&nbsp; Y O U</h3>
+
+      <!-- Relationship anniversary counter -->
+      <main class="countup-section" aria-labelledby="countup-title">
+        <section class="countup-card">
+          <p class="countup-kicker">OUR LITTLE LOVE STORY</p>
+          <h2 class="countup-title" id="countup-title">Mình đã yêu nhau</h2>
+          <p class="countup-since">Every day with you feels like a tiny fairytale ♡</p>
+          <div class="countup-date"><span>NGÀY BẮT ĐẦU</span><strong>16 THÁNG 11, 2026</strong></div>
+          <div class="countup-boxes" role="timer" aria-label="Thời gian chúng mình đã yêu nhau">
+            <div class="countup-box"><span class="cu-num" id="cu-days">0</span><span class="cu-unit">NGÀY</span></div>
+            <div class="countup-box"><span class="cu-num" id="cu-hours">00</span><span class="cu-unit">GIỜ</span></div>
+            <div class="countup-box"><span class="cu-num" id="cu-mins">00</span><span class="cu-unit">PHÚT</span></div>
+            <div class="countup-box"><span class="cu-num" id="cu-secs">00</span><span class="cu-unit">GIÂY</span></div>
+          </div>
+          <p class="countup-note">Every second with you is my favorite <span aria-hidden="true">♥</span></p>
+          <div class="countup-love-lines" aria-label="Lời nhắn yêu thương">
+            <p>Cảm ơn em đã đến, khiến những ngày bình thường trở nên thật dịu dàng.</p>
+            <p>Anh trân trọng từng khoảnh khắc nhỏ bé, miễn là trong đó có em.</p>
+            <p>Thật vui vì chúng ta đã gặp nhau và có cơ hội trở thành một phần trong cuộc sống của nhau. Hy vọng chúng ta sẽ có thật nhiều ngày tháng đẹp đẽ bên nhau. ❤️</p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Glowing Sparkle Heart Animation -->
+    <div class="heart-stage">
+      <div class="glow-heart-wrap">
+        <canvas id="heartCanvas" width="320" height="320"></canvas>
+      </div>
+    </div>
+
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="js/main.js"></script>
-  <script src="js/particle.js"></script>
   <script src="js/universe.js"></script>
+
+  <script>
+    (function startLoveCounter() {
+      var start = new Date(2026, 10, 16, 0, 0, 0).getTime();
+      function update() {
+        var elapsed = Math.max(0, Date.now() - start);
+        var totalSeconds = Math.floor(elapsed / 1000);
+        var days = Math.floor(totalSeconds / 86400);
+        var hours = Math.floor((totalSeconds % 86400) / 3600);
+        var minutes = Math.floor((totalSeconds % 3600) / 60);
+        var seconds = totalSeconds % 60;
+        document.getElementById("cu-days").textContent = days;
+        document.getElementById("cu-hours").textContent = String(hours).padStart(2, "0");
+        document.getElementById("cu-mins").textContent = String(minutes).padStart(2, "0");
+        document.getElementById("cu-secs").textContent = String(seconds).padStart(2, "0");
+      }
+      update();
+      setInterval(update, 1000);
+    })();
+
+    var audio = document.getElementById("linkmp3");
+    var musicBtn = document.getElementById("musicBtn");
+
+    function updateMusicBtn(playing) {
+      if (!musicBtn) return;
+      var icon = musicBtn.querySelector("i");
+      var text = musicBtn.querySelector("span");
+      if (playing) {
+        musicBtn.classList.add("playing");
+        if (icon) icon.className = "fas fa-compact-disc";
+        if (text) text.textContent = "Tắt nhạc";
+      } else {
+        musicBtn.classList.remove("playing");
+        if (icon) icon.className = "fas fa-volume-mute";
+        if (text) text.textContent = "Bật nhạc";
+      }
+    }
+
+    function toggleMusic() {
+      if (!audio) return;
+      if (audio.paused) {
+        audio.play().then(function() {
+          updateMusicBtn(true);
+        }).catch(function() {});
+      } else {
+        audio.pause();
+        updateMusicBtn(false);
+      }
+    }
+
+    // Auto play attempt
+    if (audio) {
+      audio.play().then(function() {
+        updateMusicBtn(true);
+      }).catch(function() {
+        updateMusicBtn(false);
+      });
+    }
+
+    document.body.addEventListener("click", function startOnClick() {
+      if (audio && audio.paused) {
+        audio.play().then(function() {
+          updateMusicBtn(true);
+        }).catch(function() {});
+      }
+      document.body.removeEventListener("click", startOnClick);
+    });
+
+    // Trái tim bay lên
+    function riseHeart() {
+      var heart = document.createElement("div");
+      heart.className = "rising-heart";
+      var heartSymbols = ["\u2764\uFE0F", "\u{1F496}", "\u{1F495}", "\u{1F497}", "\u{1F493}", "\u{1F338}", "\u2728"];
+      heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+      heart.style.left = (Math.random() * 92) + "vw";
+      
+      // Kích thước ngẫu nhiên từ 32px đến 50px
+      var size = Math.floor(Math.random() * 18) + 32;
+      heart.style.fontSize = size + "px";
+      
+      var duration = (Math.random() * 3 + 4.5); // Bay lên trong 4.5 đến 7.5 giây
+      heart.style.animationDuration = duration + "s";
+      
+      document.body.appendChild(heart);
+      
+      setTimeout(function() {
+        heart.remove();
+      }, duration * 1000);
+    }
+    
+    // Tạo trái tim đều đặn
+    setInterval(riseHeart, 360);
+
+    // ============================================================
+    // GLOWING SPARKLE HEART CANVAS ANIMATION
+    // ============================================================
+    (function() {
+      var cvs = document.getElementById('heartCanvas');
+      if (!cvs) return;
+      var ctx = cvs.getContext('2d');
+      var W = cvs.width, H = cvs.height;
+      var t = 0;
+
+      // Sparkle particles
+      var sparks = [];
+      function Spark() {
+        var angle = Math.random() * Math.PI * 2;
+        var r = 90 + Math.random() * 50;
+        this.x = W/2 + Math.cos(angle) * r * (0.6 + Math.random()*0.4);
+        this.y = H/2 + Math.sin(angle) * r * (0.6 + Math.random()*0.4);
+        this.size = 1.5 + Math.random() * 3.5;
+        this.alpha = 0;
+        this.maxAlpha = 0.5 + Math.random() * 0.5;
+        this.life = 0;
+        this.maxLife = 60 + Math.random() * 80;
+        this.vx = (Math.random() - 0.5) * 1.2;
+        this.vy = (Math.random() - 0.5) * 1.2;
+        this.color = ['#ff6eb4','#ff9fd4','#ffcce8','#ff417d','#ffb3d9','#fff0f8','#ffd6ec'][Math.floor(Math.random()*7)];
+      }
+      Spark.prototype.update = function() {
+        this.life++;
+        var p = this.life / this.maxLife;
+        this.alpha = p < 0.3 ? (p/0.3)*this.maxAlpha : (1-p)*this.maxAlpha;
+        this.x += this.vx; this.y += this.vy;
+        return this.life < this.maxLife;
+      };
+      Spark.prototype.draw = function() {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.fillStyle = this.color;
+        ctx.shadowColor = this.color;
+        ctx.shadowBlur = 10;
+        // Draw star shape
+        ctx.beginPath();
+        for (var i = 0; i < 5; i++) {
+          var a = (i * 4 * Math.PI / 5) - Math.PI/2;
+          var ia = a + Math.PI/5;
+          if (i === 0) ctx.moveTo(this.x + Math.cos(a)*this.size, this.y + Math.sin(a)*this.size);
+          else ctx.lineTo(this.x + Math.cos(a)*this.size, this.y + Math.sin(a)*this.size);
+          ctx.lineTo(this.x + Math.cos(ia)*this.size*0.4, this.y + Math.sin(ia)*this.size*0.4);
+        }
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+      };
+
+      // Draw heart shape path
+      function heartPath(cx, cy, size) {
+        ctx.beginPath();
+        ctx.moveTo(cx, cy + size * 0.3);
+        ctx.bezierCurveTo(cx, cy - size * 0.1,  cx - size * 0.6, cy - size * 0.6,  cx - size * 0.6, cy - size * 0.15);
+        ctx.bezierCurveTo(cx - size * 0.6, cy + size * 0.3,  cx, cy + size * 0.65,  cx, cy + size * 0.9);
+        ctx.bezierCurveTo(cx, cy + size * 0.65,  cx + size * 0.6, cy + size * 0.3,  cx + size * 0.6, cy - size * 0.15);
+        ctx.bezierCurveTo(cx + size * 0.6, cy - size * 0.6,  cx, cy - size * 0.1,  cx, cy + size * 0.3);
+        ctx.closePath();
+      }
+
+      function drawGlowHeart(pulse) {
+        var cx = W/2, cy = H/2 + 10;
+        var base = 95;
+        var size = base + Math.sin(pulse * 0.08) * 7;
+
+        // Outer glow layers
+        for (var g = 4; g >= 1; g--) {
+          ctx.save();
+          heartPath(cx, cy, size + g*14);
+          var grd = ctx.createRadialGradient(cx, cy - size*0.1, size*0.1, cx, cy, size*1.5);
+          grd.addColorStop(0, 'rgba(255,100,160,' + (0.04 * (5-g)) + ')');
+          grd.addColorStop(1, 'rgba(255,180,220,0)');
+          ctx.fillStyle = grd;
+          ctx.fill();
+          ctx.restore();
+        }
+
+        // Main heart fill â€” gradient
+        ctx.save();
+        heartPath(cx, cy, size);
+        var grad = ctx.createLinearGradient(cx-size, cy-size, cx+size, cy+size);
+        grad.addColorStop(0,   '#ff6eb4');
+        grad.addColorStop(0.4, '#ff417d');
+        grad.addColorStop(0.75,'#ff1a6c');
+        grad.addColorStop(1,   '#c91058');
+        ctx.fillStyle = grad;
+        ctx.shadowColor = '#ff6eb4';
+        ctx.shadowBlur = 32 + Math.sin(pulse*0.07)*12;
+        ctx.fill();
+        ctx.restore();
+
+        // Inner highlight shine
+        ctx.save();
+        heartPath(cx - size*0.18, cy - size*0.22, size*0.42);
+        var shine = ctx.createRadialGradient(cx - size*0.18, cy - size*0.3, size*0.03, cx - size*0.1, cy - size*0.15, size*0.42);
+        shine.addColorStop(0, 'rgba(255,255,255,0.65)');
+        shine.addColorStop(0.5,'rgba(255,255,255,0.15)');
+        shine.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.fillStyle = shine;
+        ctx.fill();
+        ctx.restore();
+
+        // Rim outline
+        ctx.save();
+        heartPath(cx, cy, size);
+        ctx.strokeStyle = 'rgba(255,200,230,0.6)';
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      function loop() {
+        ctx.clearRect(0, 0, W, H);
+        t++;
+
+        // Spawn sparks
+        if (t % 4 === 0) sparks.push(new Spark());
+
+        // Draw glowing heart
+        drawGlowHeart(t);
+
+        // Update & draw sparks
+        sparks = sparks.filter(function(s) { return s.update(); });
+        sparks.forEach(function(s) { s.draw(); });
+
+        requestAnimationFrame(loop);
+      }
+      loop();
+    })();
+  </script>
 </body>
 
 </html>
+
+

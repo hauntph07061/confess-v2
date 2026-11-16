@@ -37,10 +37,10 @@ function animkata2() {
 function otomatis2b() {
 	kalimatb.innerHTML = "";
 	kalimatc.innerHTML = kalimatc2.innerHTML;
-    fthilang();
-    ftganti = 2;
-    setTimeout(ftmuncul, 100);
-    kalimat.style.display = "none";
+	fthilang();
+	ftganti = 2;
+	setTimeout(ftmuncul, 100);
+	kalimat.style.display = "none";
 	kalimatc.style.opacity = "1";
 	setTimeout(mulaict, 100);
 }
@@ -60,7 +60,7 @@ function animkata3() {
 	kalimat.innerHTML = kalimat3.innerHTML;
 	kalimatb.innerHTML = kalimatb3.innerHTML;
 	kalimatc.innerHTML = kalimatc3.innerHTML;
-    kalimat.style.display = "unset"
+	kalimat.style.display = "unset";
 	kalimat.style.opacity = "1";
 	kalimatb.style.opacity = "1";
 	kalimatc.style.opacity = "1";
@@ -84,7 +84,7 @@ async function diterima() {
 	setTimeout(ftmuncul, 400);
 	Bn2.style.display = "none";
 	wallpaper.style = "transform: scale(1)";
-	bq.style = "position:relative;opacity:1;visibility:visible;transform: scale(1);transition:all .7s ease;border-radius:var(--bingkai);margin-top:0;";
+	bq.style = "position:relative;opacity:1;visibility:visible;transform: scale(1);transition:all .7s ease;border-radius:24px;margin-top:0;";
 	Tombol.style = "opacity:0;transition:all .5s ease;transform: scale(.1);";
 	otomatis2();
 }
@@ -97,7 +97,7 @@ function ditolak() {
 		if (flagg == 1) {
 			Bn.style = "margin:12px 0 12px 12px;cursor:default;opacity:0;transition:all .3s ease;";
 			flagg = 2;
-			Bn2.style = "width:auto;opacity:1;transition:all .3s ease;margin:160px 0 12px 140px;"
+			Bn2.style = "width:auto;opacity:1;transition:all .3s ease;margin:160px 0 12px 140px;";
 		}
 	}
 }
@@ -106,15 +106,15 @@ function ditolak2() {
 	if (fungsi == 1) {
 		if (flagg == 2) {
 			Bn2.style = "width:auto;opacity:1;transition:all .3s ease;margin:190px 0 12px 12px;";
-			flagg = 3
+			flagg = 3;
 		} else if (flagg == 3) {
 			Bn2.style = "width:auto;opacity:1;transition:all .3s ease;margin:160px 160px 12px 12px;";
-			flagg = 4
+			flagg = 4;
 		} else if (flagg == 4) {
 			Bn2.style = "transition:all .3s ease;margin:12px 0 12px 12px;";
 			kalimatc.style.opacity = "0";
-			Bn.style = "margin:12px 0 12px 12px";
-			flagg = 1
+			Bn.style = "margin:12px 0 12px 12px;opacity:1;cursor:pointer;";
+			flagg = 1;
 		}
 	}
 }
@@ -127,7 +127,6 @@ function mulaict() {
 		if (timeleft <= 0)
 			clearInterval(downloadTimer);
 		if (timeleft == 0) {
-			setInterval(createHeart, 200);
 			fthilang();
 			ftganti = 3;
 			setTimeout(ftmuncul, 400);
