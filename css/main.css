@@ -732,3 +732,49 @@ body {
 .countup-love-lines { border-top-color: rgba(219, 146, 176, .28); }
 .countup-love-lines p { color: #965a72; }
 
+/* Keep the shared keepsake card comfortable on narrow phone screens. */
+@media (max-width: 600px) {
+  body {
+    min-height: 100svh;
+    padding: max(64px, calc(env(safe-area-inset-top) + 52px)) 12px
+      max(20px, env(safe-area-inset-bottom));
+  }
+
+  .music-btn {
+    top: max(12px, env(safe-area-inset-top));
+    right: 12px;
+    padding: 8px 13px;
+    font-size: 12px;
+  }
+
+  .title { width: 100%; margin-top: 0; }
+  .title-text { border-radius: 22px; padding: 20px 14px 18px; }
+  .title h3.STARDUST1 { font-size: 12px; letter-spacing: 1px; }
+  .title h1.STARDUST2 { font-size: clamp(52px, 16vw, 72px); }
+  .title h3.STARDUST3 { font-size: 13px; letter-spacing: 3px; }
+
+  .countup-section { margin-top: 12px; padding-top: 12px; }
+  .countup-title { font-size: clamp(24px, 7vw, 32px); }
+  .countup-since { margin-bottom: 14px; font-size: 12px; }
+  .countup-date { width: 100%; min-width: 0; margin-bottom: 12px; padding: 10px 12px; }
+  .countup-date strong { font-size: 15px; }
+  .countup-boxes { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+  .countup-box { min-width: 0; min-height: 66px; gap: 5px; border-radius: 11px; }
+  .cu-num { font-size: clamp(19px, 6vw, 26px); }
+  .cu-unit { font-size: 8px; letter-spacing: .5px; }
+  .countup-total-seconds { margin-top: 12px; font-size: 12px; }
+  .countup-total-seconds strong { font-size: 15px; }
+  .countup-note { margin-top: 12px; }
+  .countup-love-lines { margin-top: 12px; padding-top: 10px; }
+  .countup-love-lines p { font-size: 11px; line-height: 1.5; }
+}
+
+@media (max-width: 360px) {
+  body { padding-left: 9px; padding-right: 9px; }
+  .title-text { padding-left: 10px; padding-right: 10px; }
+  .countup-boxes { gap: 4px; }
+  .countup-box { min-height: 60px; }
+  .cu-num { font-size: 19px; }
+  .countup-total-seconds { font-size: 11px; }
+}
+
