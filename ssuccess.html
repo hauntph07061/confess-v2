@@ -57,6 +57,7 @@
             <div class="countup-box"><span class="cu-num" id="cu-mins">00</span><span class="cu-unit">PHÚT</span></div>
             <div class="countup-box"><span class="cu-num" id="cu-secs">00</span><span class="cu-unit">GIÂY</span></div>
           </div>
+          <p class="countup-total-seconds">Tụi mình đã bên nhau <strong id="cu-total-seconds">0</strong> giây rồi ♡</p>
           <p class="countup-note">Every second with you is my favorite <span aria-hidden="true">♥</span></p>
           <div class="countup-love-lines" aria-label="Lời nhắn yêu thương">
             <p>Cảm ơn em đã đến, khiến những ngày bình thường trở nên thật dịu dàng.</p>
@@ -94,6 +95,7 @@
         document.getElementById("cu-hours").textContent = String(hours).padStart(2, "0");
         document.getElementById("cu-mins").textContent = String(minutes).padStart(2, "0");
         document.getElementById("cu-secs").textContent = String(seconds).padStart(2, "0");
+        document.getElementById("cu-total-seconds").textContent = totalSeconds.toLocaleString("vi-VN");
       }
       update();
       setInterval(update, 1000);

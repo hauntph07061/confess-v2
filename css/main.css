@@ -340,6 +340,8 @@ canvas {
 .countup-box { min-height: 88px; display: flex; flex-direction: column; justify-content: center; gap: 7px; color: #fff1df; background: linear-gradient(145deg, #b51d25, #7d111b); border-radius: 11px; box-shadow: 0 8px 18px rgba(122,17,27,.2); }
 .cu-num { font: 600 clamp(25px, 5vw, 34px) 'Quicksand', sans-serif; line-height: 1; font-variant-numeric: tabular-nums; }
 .cu-unit { color: rgba(255,235,220,.72); font-size: 9px; letter-spacing: 1px; }
+.countup-total-seconds { margin: 15px 0 0; color: #92736d; font-size: 13px; font-variant-numeric: tabular-nums; }
+.countup-total-seconds strong { color: #a51e28; font: 700 17px 'Quicksand', sans-serif; }
 .countup-note { margin: 23px 0 0; color: #936e69; font-size: 13px; }
 .countup-note span { color: #b21d2a; }
 @keyframes counterFade { from { opacity: 0; } to { opacity: 1; } }
